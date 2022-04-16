@@ -11,6 +11,9 @@ Future <Map> getPics() async{
 
   http.Response response=await http.get(Uri.parse
   ('https://pixabay.com/api/?key=$apiKay&q=cars&image_type=photo&pretty=true'));
+var jsonString=response.body;
+var jsonMap=json.decode(jsonString);
+ 
 
  return jsonDecode(response.body);
 
