@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
    @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
+//აქ გაწერიალი უბრალოდ გზა 
+//რომელი კონტექსტიდან რომელ კონტექსტზე გადავიდეთ.
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

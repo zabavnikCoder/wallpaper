@@ -18,7 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
   String _password = "";
 
   final _auth = FirebaseAuth.instance;
-  bool _isLoading = false;
   void togglePassword() {
     setState(() {
       passwordVisible = !passwordVisible;
@@ -122,7 +121,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 56.0,
                       onPressed: () async {
                         setState(() {
-                          _isLoading = true;
                         });
                         try {
                           final user = await _auth.signInWithEmailAndPassword(
@@ -134,7 +132,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           print(e);
                         }
                         setState(() {
-                          _isLoading = false;
                         });
                       },
                       child: const Text('Log In'),
@@ -154,6 +151,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     textColor: Colors.white,
                     minWidth: 300,
                     height: 56,
+                    //როდესაც ბათონზე დააჭერს მომხმარებელი გამოიტან
+                    //google-ის ლოგინის ფანჯარას რომლითაც
+                    //მომხმარებელს შეეძლება დალოგინდეს
                     onPressed: (){
                       signInWithGoogle().then((value) {
                         print(value.user!.uid);
@@ -190,12 +190,14 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+  //აქ goole-დან ვლოგინდებით,გავდივართ აუთენტიპიკაციას
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     final GoogleSignInAuthentication? googleAuth =
         await googleUser!.authentication;
-
+//credential-ით ვეუბნებით,რომ კლიენტს აქვს რესურსზე წვდომის უფლება
+//ამ რესურსის მფლობელის idToken-ით მაგალითად
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,

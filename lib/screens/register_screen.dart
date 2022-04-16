@@ -1,7 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wallpapers/theme.dart';
 import 'package:wallpapers/widgets/primary_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 class RegisterScreen extends StatefulWidget {
   
   static const String path_id = 'register_screen';
